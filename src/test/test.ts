@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import calc from './calc';
 
 describe('Main', () => {
-  // soke tests
+  // smoke tests
   describe('Smoke tests', () => {
     it('should exsit the calc lib', () => {
       expect(calc).to.exist;
@@ -30,7 +30,7 @@ describe('Main', () => {
   });
 
   describe('Sub', () => {
-    it('should return 4 when `sum(2,2)`', () => {
+    it('should return 4 when `sub(2,2)`', () => {
       expect(calc.sub(6, 2)).to.equal(4);
     });
   });
@@ -42,7 +42,7 @@ describe('Main', () => {
   });
 
   describe('Div', () => {
-    it('should return 2 when `div(5,10)`', () => {
+    it('should return 5 when `div(10,5)`', () => {
       expect(calc.div(10, 2)).to.equal(5);
     });
   });
