@@ -30,7 +30,7 @@ describe('Main', () => {
   });
 
   describe('Sub', () => {
-    it('should return 4 when `sub(2,2)`', () => {
+    it('should return 4 when `sub(6,2)`', () => {
       expect(calc.sub(6, 2)).to.equal(4);
     });
   });
@@ -42,7 +42,7 @@ describe('Main', () => {
   });
 
   describe('Div', () => {
-    it('should return 5 when `div(10,5)`', () => {
+    it('should return 5 when `div(10,2)`', () => {
       expect(calc.div(10, 2)).to.equal(5);
     });
   });
