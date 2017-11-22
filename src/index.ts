@@ -9,6 +9,7 @@ import * as mongoose from 'mongoose';
 import * as passport from 'passport';
 
 import { unlessPath } from './config/unlessPath';
+import allRoutes from './routes';
 
 const server: Application = express();
 const PORT = process.env.PORT || 3000;
@@ -51,7 +52,9 @@ mongoose
   .connect(config.mongoDB, { useMongoClient: true })
   .then(() => console.log('Conected on MongoDB'), err => console.log(err));
 
-// Some libs an configs, can run only in development mode.
+/**
+ * Some libs an configs, can run only in development mode.
+ */
 if (process.env.NODE_ENV !== 'production') {
   /**
    * HTTP request logger middleware for node.js
@@ -60,17 +63,28 @@ if (process.env.NODE_ENV !== 'production') {
   const morgan = require('morgan');
   server.use(morgan('dev'));
 
-  // Documentation
+  /**
+   * Show documentation on dev mode
+   * Show run app client on dev mode
+   */
   server.use('/doc', express.static('src/public/doc'));
   server.use('/', express.static('src/public/app'));
   server.use('/app', express.static('src/public/app'));
 } else {
-  // Documentation
+  // All resources inside `else` statement, will be available only production mode.
+
+  /**
+   * Show documentation on production mode
+   * Show run app client on production mode
+   */
   server.use('/doc', express.static('build/public/doc'));
   server.use('/', express.static('build/public/app'));
   server.use('/app', express.static('build/public/app'));
 
-  // Protect all routes
+  /**
+   * Protect all routes.
+   * Routes includes in `./config/unlessPath.ts` don't will be not protected.
+   */
   server.use(jwt({ secret: config.jwtSecret }).unless(unlessPath));
 }
 
@@ -83,7 +97,15 @@ server.use(
   }
 );
 
-// Run server on set port
+/**
+ * Set all routes in application
+ */
+allRoutes(server);
+
+/**
+ * Run server on setted port
+ * Show wich mode is running
+ */
 server.listen(PORT, () => {
   console.log(
     `Server running on port ${PORT} in ${process.env.NODE_ENV} mode.`
