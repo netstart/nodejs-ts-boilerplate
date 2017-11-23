@@ -11,8 +11,6 @@ import * as passport from 'passport';
 import { unlessPath } from './config/unlessPath';
 import allRoutes from './routes';
 
-import default from './test/calc';
-
 const server: Application = express();
 const PORT = process.env.PORT || 3000;
 
@@ -113,7 +111,6 @@ server.listen(PORT, () => {
     `Server running on port ${PORT} in ${process.env.NODE_ENV} mode.`
   );
 });
-
 
 /**
  * Export `express instance` for use in tests environment
