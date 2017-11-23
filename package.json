@@ -14,17 +14,14 @@
     "npm": "5.5.1"
   },
   "scripts": {
-    "heroku-prebuild":
-      "npm install --only=dev && node_modules/.bin/tsc -p . && npm run makeDevDoc",
+    "heroku-prebuild": "npm install --only=dev && node_modules/.bin/tsc -p . && npm run makeDevDoc",
     "dev": "export NODE_ENV='devel' && nodemon --exec ts-node src/index.ts",
-    "prod":
-      "export NODE_ENV='production' && nodemon --exec ts-node src/index.ts",
+    "prod": "export NODE_ENV='production' && nodemon --exec ts-node src/index.ts",
     "build": "tsc -p . && apidoc -i src -o build/public/doc",
     "buildTest": "tsc -p .",
     "makeDoc": "node_modules/.bin/apidoc -i src -o src/public/doc",
     "copyApp": "cd src/public && cp -rfv app ../../build/public",
-    "makeDevDoc":
-      "node_modules/.bin/apidoc -i src -o build/public/doc && npm run copyApp && ls -lisa build/public/",
+    "makeDevDoc": "node_modules/.bin/apidoc -i src -o build/public/doc && npm run copyApp && ls -lisa build/public/",
     "start": "node build/index.js",
     "test": "node_modules/.bin/mocha --opts src/test/mocha.opts",
     "test:watch": "node_modules/.bin/mocha --opts src/test/mocha.opts --watch"
@@ -45,12 +42,14 @@
     "@types/morgan": "^1.7.35",
     "@types/node": "^8.0.53",
     "@types/passport": "^0.4.1",
+    "@types/supertest": "^2.0.4",
     "apidoc": "^0.17.6",
     "chai": "^4.1.2",
     "eslint": "^4.11.0",
     "eslint-plugin-prettier": "^2.3.1",
     "mocha": "^4.0.1",
     "prettier": "^1.8.2",
+    "supertest": "^3.0.0",
     "ts-node": "^3.3.0",
     "tslint": "^5.8.0",
     "typescript": "^2.6.1"
