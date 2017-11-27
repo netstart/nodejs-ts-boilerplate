@@ -14,21 +14,18 @@
     "npm": "5.5.1"
   },
   "scripts": {
-    "heroku-prebuild":
-      "npm install --only=dev && node_modules/.bin/tsc -p . && npm run makeDevDoc",
+    "heroku-prebuild": "npm install --only=dev && tsc -p . && npm run makeDevDoc",
     "dev": "export NODE_ENV='devel' && nodemon --exec ts-node src/index.ts",
-    "prod":
-      "export NODE_ENV='production' && nodemon --exec ts-node src/index.ts",
+    "prod": "export NODE_ENV='production' && nodemon --exec ts-node src/index.ts",
     "build": "tsc -p . && apidoc -i src -o build/public/doc",
     "buildTest": "tsc -p .",
     "makeDoc": "node_modules/.bin/apidoc -i src -o src/public/doc",
     "copyApp": "cd src/public && cp -rfv app ../../build/public",
-    "makeDevDoc":
-      "node_modules/.bin/apidoc -i src -o build/public/doc && npm run copyApp && ls -lisa build/public/",
+    "copyAppJS": "node scripts-shell/copy-app.js",
+    "makeDevDoc": "node_modules/.bin/apidoc -i src -o build/public/doc && npm run copyAppJS",
     "start": "node build/index.js",
     "test": "node_modules/.bin/mocha --opts src/test/mocha.opts",
-    "test:watch":
-      "export PORT='3001' NODE_ENV='devel' && node_modules/.bin/mocha --opts src/test/mocha.opts --watch"
+    "test:watch": "export PORT='3001' NODE_ENV='devel' && node_modules/.bin/mocha --opts src/test/mocha.opts --watch"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.1",
@@ -53,6 +50,7 @@
     "eslint-plugin-prettier": "^2.3.1",
     "mocha": "^4.0.1",
     "prettier": "^1.8.2",
+    "shelljs": "^0.7.8",
     "supertest": "^3.0.0",
     "ts-node": "^3.3.0",
     "tslint": "^5.8.0",
